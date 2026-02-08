@@ -5,31 +5,22 @@ import { GoogleAnalytics } from '@/components/GoogleAnalytics'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
-  title: '1 Fathom Sportfishing Charters | Best Fishing in Stuart, FL',
-  description: 'Affordable fishing charters in Stuart, FL with Captain CJ. Small group trips (up to 2 guests) on a 20\' NauticStar. Inshore, nearshore, and offshore fishing.',
-  keywords: 'fishing charters Stuart FL, Jensen Beach fishing, Jupiter fishing charters, Vero Beach fishing, Captain CJ, sportfishing, inshore fishing Florida, offshore fishing Florida, bay boat charters',
+  title: '1 Fathom Sportfishing Charters | Treasure Coast Fishing',
+  description: 'Fishing charters on the Treasure Coast with Captain CJ. Inshore, nearshore, and offshore trips launching from Jensen Beach, Vero Beach, Jupiter & more.',
+  keywords: 'fishing charters Treasure Coast, Jensen Beach fishing, Jupiter fishing charters, Vero Beach fishing, Captain CJ, sportfishing, inshore fishing Florida, offshore fishing Florida, bay boat charters',
   authors: [{ name: '1 Fathom Sportfishing Charters' }],
   openGraph: {
-    title: '1 Fathom Sportfishing Charters | Stuart, FL',
-    description: 'Experience South Florida\'s best fishing with intimate charters in Stuart, FL',
+    title: '1 Fathom Sportfishing | Treasure Coast',
+    description: 'Inshore, nearshore & offshore fishing charters with Captain CJ. Launching from Jensen Beach, Vero Beach, Jupiter & more.',
     url: 'https://1fathom.com',
     siteName: '1 Fathom Sportfishing Charters',
-    images: [
-      {
-        url: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=630',
-        width: 1200,
-        height: 630,
-        alt: '1 Fathom Sportfishing Charters',
-      },
-    ],
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: '1 Fathom Sportfishing Charters | Stuart, FL',
-    description: 'Affordable fishing charters with Captain CJ. Book your South Florida fishing adventure today.',
-    images: ['https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=630'],
+    title: '1 Fathom Sportfishing | Treasure Coast',
+    description: 'Inshore, nearshore & offshore fishing charters with Captain CJ. Launching from Jensen Beach, Vero Beach, Jupiter & more.',
   },
   robots: {
     index: true,
