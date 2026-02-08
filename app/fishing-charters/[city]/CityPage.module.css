@@ -1,0 +1,277 @@
+.hero {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0.85) 100%
+  ),
+  url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920&q=80') center/cover;
+  padding: 160px 24px 100px;
+  text-align: center;
+}
+
+.heroContent {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.headline {
+  color: var(--charcoal);
+  margin-bottom: 24px;
+}
+
+.subheadline {
+  font-size: clamp(18px, 3vw, 20px);
+  color: var(--charcoal);
+  opacity: 0.8;
+  margin-bottom: 48px;
+  line-height: 1.6;
+}
+
+.locationGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.description {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 32px;
+  color: var(--charcoal);
+}
+
+.infoBox {
+  margin-bottom: 32px;
+}
+
+.infoBox h3 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: var(--charcoal);
+}
+
+.infoBox p {
+  font-size: 16px;
+  color: var(--charcoal);
+  opacity: 0.8;
+}
+
+.speciesList {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.speciesList li {
+  font-size: 16px;
+  color: var(--charcoal);
+  padding-left: 20px;
+  position: relative;
+}
+
+.speciesList li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+.quickFacts,
+.attractions {
+  margin-bottom: 32px;
+}
+
+.quickFacts h3,
+.attractions h3 {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.factItem {
+  font-size: 16px;
+  color: var(--charcoal);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.factItem strong {
+  display: inline-block;
+  min-width: 140px;
+  color: var(--charcoal);
+  font-weight: 600;
+}
+
+.attractions ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.attractions li {
+  font-size: 16px;
+  color: var(--charcoal);
+  padding-left: 20px;
+  position: relative;
+}
+
+.attractions li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--cyan);
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: var(--charcoal);
+  opacity: 0.7;
+  margin-top: 16px;
+}
+
+.tripsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.tripsGrid .card {
+  text-align: center;
+}
+
+.tripsGrid h4 {
+  margin-bottom: 20px;
+}
+
+.price {
+  font-family: var(--font-display);
+  font-size: 48px;
+  color: var(--cyan);
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.seasonal {
+  font-size: 14px;
+  color: var(--cyan);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.benefit {
+  text-align: center;
+}
+
+.benefitIcon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.benefit h4 {
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.benefit p {
+  font-size: 16px;
+  color: var(--charcoal);
+  opacity: 0.8;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.faqItem h4 {
+  font-size: 18px;
+  color: var(--charcoal);
+  margin-bottom: 12px;
+}
+
+.faqItem p {
+  font-size: 16px;
+  color: var(--charcoal);
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+.citiesGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.cityCard {
+  text-align: center;
+  display: block;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.cityCard h4 {
+  color: var(--charcoal);
+  margin-bottom: 8px;
+}
+
+.cityCard p {
+  font-size: 14px;
+  color: var(--charcoal);
+  opacity: 0.6;
+}
+
+.cityCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 768px) {
+  .locationGrid {
+    grid-template-columns: 60% 40%;
+    gap: 64px;
+  }
+
+  .tripsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .benefitsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .citiesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .benefitsGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .citiesGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
