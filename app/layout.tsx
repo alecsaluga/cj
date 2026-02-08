@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import 'mapbox-gl/dist/mapbox-gl.css'
 import { GoogleAnalytics } from '@/components/GoogleAnalytics'
 import Script from 'next/script'
 

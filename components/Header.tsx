@@ -48,7 +48,7 @@ export function Header() {
           <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection('contact') }}>CONTACT</a>
         </nav>
 
-        <button className={styles.bookButton} onClick={() => scrollToSection('trips')}>
+        <button className={styles.bookButton} onClick={() => window.dispatchEvent(new CustomEvent('openBookingModal'))}>
           BOOK NOW
         </button>
 
@@ -71,7 +71,7 @@ export function Header() {
             <a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection('about') }}>ABOUT</a>
             <a href="#trips" onClick={(e) => { e.preventDefault(); scrollToSection('trips') }}>TRIPS</a>
             <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection('contact') }}>CONTACT</a>
-            <button className={styles.mobileBookButton} onClick={() => scrollToSection('trips')}>
+            <button className={styles.mobileBookButton} onClick={() => window.dispatchEvent(new CustomEvent('openBookingModal'))}>
               BOOK NOW
             </button>
           </nav>

@@ -1,3 +1,5 @@
+'use client'
+
 import styles from './Hero.module.css'
 
 export function Hero() {
@@ -5,16 +7,19 @@ export function Hero() {
     <section id="hero" className={styles.hero}>
       <div className={styles.content}>
         <h1 className={styles.headline}>
-          SOUTH FLORIDA'S<br />
+          TREASURE COAST&apos;S<br />
           BEST FISHING<br />
           EXPERIENCE
         </h1>
         <p className={styles.subheadline}>
-          Jensen Beach, Florida
+          Launch from Jensen Beach, Vero Beach, Jupiter, and more
         </p>
-        <a href="#trips" className="btn btn-primary btn-large">
+        <button
+          className="btn btn-primary btn-large"
+          onClick={() => window.dispatchEvent(new CustomEvent('openBookingModal'))}
+        >
           BOOK YOUR TRIP
-        </a>
+        </button>
       </div>
     </section>
   )

@@ -1,3 +1,5 @@
+'use client'
+
 import styles from './BookingCTA.module.css'
 
 export function BookingCTA() {
@@ -13,9 +15,12 @@ export function BookingCTA() {
           Book your charter with Captain CJ today.
         </p>
 
-        <a href="tel:5551234567" className="btn btn-primary btn-large">
+        <button
+          className="btn btn-primary btn-large"
+          onClick={() => window.dispatchEvent(new CustomEvent('openBookingModal'))}
+        >
           BOOK YOUR TRIP NOW
-        </a>
+        </button>
 
         <p className={styles.contact}>
           Questions? Call or text: <a href="tel:5551234567">(555) 123-4567</a>

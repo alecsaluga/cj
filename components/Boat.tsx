@@ -44,7 +44,7 @@ export function Boat() {
               </li>
               <li>
                 <span className={styles.checkmark}>✓</span>
-                Holds up to 2 guests comfortably
+                Holds up to 3 guests comfortably
               </li>
             </ul>
 

@@ -1,35 +1,33 @@
+'use client'
+
 import styles from './Trips.module.css'
 
 export function Trips() {
   const trips = [
     {
       id: 1,
-      title: '4 HOUR INSHORE FISHING (AM)',
-      time: '8:00 AM Start',
+      title: '4 HOUR INSHORE FISHING',
       price: '$400',
       seasonal: false,
       availability: null,
     },
     {
       id: 2,
-      title: '4 HOUR INSHORE FISHING (PM)',
-      time: '1:00 PM Start',
-      price: '$400',
+      title: '6 HOUR INSHORE FISHING',
+      price: '$550',
       seasonal: false,
       availability: null,
     },
     {
       id: 3,
-      title: '4 HOUR NEAR SHORE FISHING (AM)',
-      time: '8:00 AM Start',
+      title: '4 HOUR NEARSHORE FISHING',
       price: '$450',
       seasonal: true,
       availability: 'Available: Apr 1 - Sep 1',
     },
     {
       id: 4,
-      title: '6 HOUR OFFSHORE/NEAR SHORE TRIP',
-      time: '8:00 AM Start',
+      title: '6 HOUR OFFSHORE/NEARSHORE',
       price: '$600',
       seasonal: true,
       availability: 'Available: Apr 1 - Sep 1',
@@ -56,13 +54,11 @@ export function Trips() {
                 <p className={styles.availability}>{trip.availability}</p>
               )}
 
-              <p className={styles.time}>{trip.time}</p>
-
               <div className={styles.price}>{trip.price}</div>
 
-              <a href="#contact" className="btn btn-primary" style={{ width: '100%', marginTop: '32px' }}>
+              <button className="btn btn-primary" style={{ width: '100%', marginTop: '32px' }} onClick={() => window.dispatchEvent(new CustomEvent('openBookingModal'))}>
                 BOOK NOW
-              </a>
+              </button>
             </div>
           ))}
         </div>

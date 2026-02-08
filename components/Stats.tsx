@@ -10,7 +10,7 @@ export function Stats() {
             <div className={styles.label}>NAUTICSTAR</div>
           </div>
           <div className={styles.stat}>
-            <div className={styles.number}>1-2</div>
+            <div className={styles.number}>1-3</div>
             <div className={styles.label}>GUESTS</div>
           </div>
           <div className={styles.stat}>
