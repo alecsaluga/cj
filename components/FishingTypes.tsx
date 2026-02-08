@@ -67,20 +67,23 @@ export function FishingTypes() {
             </p>
           )}
 
-          <div className={styles.gallery}>
-            {fish.map((f) => (
-              <div key={f.name} className={styles.fishCard}>
-                <div className={styles.fishImageWrap}>
-                  <Image
-                    src={f.src}
-                    alt={f.name}
-                    fill
-                    className={styles.fishImage}
-                  />
+          <div className={styles.marqueeWrapper}>
+            {/* key forces remount + animation restart on tab change */}
+            <div key={activeTab} className={styles.marqueeTrack}>
+              {[...fish, ...fish].map((f, i) => (
+                <div key={`${f.name}-${i}`} className={styles.fishCard}>
+                  <div className={styles.fishImageWrap}>
+                    <Image
+                      src={f.src}
+                      alt={f.name}
+                      fill
+                      className={styles.fishImage}
+                    />
+                  </div>
+                  <p className={styles.fishLabel}>{f.name}</p>
                 </div>
-                <p className={styles.fishLabel}>{f.name}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
