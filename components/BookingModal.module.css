@@ -41,12 +41,12 @@
 
 .progress {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   margin-bottom: 36px;
 }
 
 .dot {
-  width: 32px;
+  flex: 1;
   height: 3px;
   background: rgba(255, 255, 255, 0.15);
   transition: background 0.2s ease;
@@ -148,6 +148,17 @@
   gap: 12px;
 }
 
+.label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+  opacity: 0.6;
+  margin-bottom: -4px;
+}
+
 .input,
 .textarea {
   background: transparent;
@@ -176,10 +187,43 @@
   resize: vertical;
 }
 
-.submitBtn {
-  margin-top: 8px;
+.timeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.timeSlot {
+  padding: 14px 8px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.timeSlot:hover {
+  border-color: var(--cyan);
+}
+
+.timeSlotSelected {
+  border-color: var(--cyan);
+  background: rgba(0, 212, 255, 0.08);
+}
+
+.nextBtn,
+.payBtn {
+  margin-top: 16px;
   text-align: center;
-  text-decoration: none;
+  width: 100%;
+}
+
+.nextBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .confirm {
@@ -217,6 +261,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  text-align: left;
 }
 
 .summaryRow {
@@ -236,6 +281,71 @@
   font-weight: 700;
 }
 
+.summaryTotal {
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 16px;
+}
+
+.summaryTotal span:last-child {
+  color: var(--cyan);
+  font-size: 20px;
+}
+
+.secureNote {
+  font-size: 12px;
+  opacity: 0.5;
+  margin-top: 12px;
+}
+
 .doneBtn {
   min-width: 160px;
+}
+
+/* Floating Call Button */
+.floatingCall {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  background: var(--cyan);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--black);
+  z-index: 2100;
+  box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+  text-decoration: none;
+}
+
+.floatingCall:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 30px rgba(0, 212, 255, 0.6);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(0, 212, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 30px rgba(0, 212, 255, 0.7);
+  }
+}
+
+@media (max-width: 480px) {
+  .timeGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .floatingCall {
+    width: 54px;
+    height: 54px;
+    bottom: 20px;
+    right: 20px;
+  }
 }

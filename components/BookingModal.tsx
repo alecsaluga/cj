@@ -6,16 +6,21 @@ import styles from './BookingModal.module.css'
 const LAUNCH_LOCATIONS = ['Jensen Beach', 'Fort Pierce', 'Stuart', 'Other']
 
 const INSHORE_TRIPS = [
-  { title: '4 Hour Inshore Fishing', price: '$400' },
-  { title: '6 Hour Inshore Fishing', price: '$550' },
+  { title: '4 Hour Inshore Fishing', price: 400, display: '$400' },
+  { title: '6 Hour Inshore Fishing', price: 550, display: '$550' },
 ]
 
 const NEARSHORE_TRIPS = [
-  { title: '4 Hour Nearshore Fishing', price: '$450', note: 'Seasonal: Apr 1 – Sep 1' },
-  { title: '6 Hour Offshore/Nearshore', price: '$600', note: 'Seasonal: Apr 1 – Sep 1' },
+  { title: '4 Hour Nearshore Fishing', price: 450, display: '$450', note: 'Seasonal: Apr 1 – Sep 1' },
+  { title: '6 Hour Offshore/Nearshore', price: 600, display: '$600', note: 'Seasonal: Apr 1 – Sep 1' },
 ]
 
-type Step = 1 | 2 | 3 | 4 | 5
+const TIME_SLOTS = [
+  '6:00 AM', '7:00 AM', '8:00 AM', '9:00 AM', '10:00 AM',
+  '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM'
+]
+
+type Step = 1 | 2 | 3 | 4 | 5 | 6
 
 export function BookingModal() {
   const [open, setOpen] = useState(false)
@@ -23,9 +28,11 @@ export function BookingModal() {
   const [launchLocation, setLaunchLocation] = useState('')
   const [fishingType, setFishingType] = useState('')
   const [selectedTrip, setSelectedTrip] = useState('')
+  const [selectedPrice, setSelectedPrice] = useState(0)
+  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
-  const [date, setDate] = useState('')
   const [notes, setNotes] = useState('')
 
   useEffect(() => {
@@ -35,9 +42,11 @@ export function BookingModal() {
       setLaunchLocation('')
       setFishingType('')
       setSelectedTrip('')
+      setSelectedPrice(0)
+      setDate('')
+      setTime('')
       setName('')
       setPhone('')
-      setDate('')
       setNotes('')
     }
     window.addEventListener('openBookingModal', handler)
@@ -48,141 +57,238 @@ export function BookingModal() {
 
   const trips = fishingType === 'inshore' ? INSHORE_TRIPS : NEARSHORE_TRIPS
 
+  const handlePayment = async () => {
+    // Store booking data in localStorage for webhook after Stripe redirect
+    const bookingData = {
+      launchLocation,
+      fishingType: fishingType === 'inshore' ? 'Inshore' : 'Nearshore & Offshore',
+      trip: selectedTrip,
+      price: selectedPrice,
+      date,
+      time,
+      name,
+      phone,
+      notes,
+      timestamp: new Date().toISOString(),
+    }
+    localStorage.setItem('pendingBooking', JSON.stringify(bookingData))
+
+    // Stripe Payment Links - update these with your actual Stripe payment link IDs
+    const stripeLinks: Record<number, string> = {
+      400: 'https://buy.stripe.com/YOUR_400_LINK',
+      450: 'https://buy.stripe.com/YOUR_450_LINK',
+      550: 'https://buy.stripe.com/YOUR_550_LINK',
+      600: 'https://buy.stripe.com/YOUR_600_LINK',
+    }
+
+    const stripeUrl = stripeLinks[selectedPrice]
+    if (stripeUrl) {
+      window.location.href = stripeUrl
+    }
+  }
+
+  // Check for successful payment on mount
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search)
+    if (urlParams.get('payment') === 'success') {
+      const pendingBooking = localStorage.getItem('pendingBooking')
+      if (pendingBooking) {
+        // Send to webhook
+        fetch('https://n8n.alecautomations.com/webhook/27d5dc31-8f82-4bdf-8f51-f055a7d3d4eb', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: pendingBooking,
+        }).then(() => {
+          localStorage.removeItem('pendingBooking')
+          // Clean up URL
+          window.history.replaceState({}, '', window.location.pathname)
+        })
+      }
+    }
+  }, [])
+
   if (!open) return null
 
   return (
-    <div className={styles.overlay} onClick={(e) => e.target === e.currentTarget && close()}>
-      <div className={styles.modal}>
-        <button className={styles.closeBtn} onClick={close} aria-label="Close">✕</button>
+    <>
+      {/* Floating Call Button */}
+      <a href="tel:5551234567" className={styles.floatingCall} aria-label="Call now">
+        <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+        </svg>
+      </a>
 
-        <div className={styles.progress}>
-          {[1, 2, 3, 4].map((s) => (
-            <div key={s} className={`${styles.dot} ${step >= s ? styles.dotActive : ''}`} />
-          ))}
-        </div>
+      <div className={styles.overlay} onClick={(e) => e.target === e.currentTarget && close()}>
+        <div className={styles.modal}>
+          <button className={styles.closeBtn} onClick={close} aria-label="Close">✕</button>
 
-        {step === 1 && (
-          <div className={styles.stepContent}>
-            <h3 className={styles.stepTitle}>WHERE DO YOU WANT TO LAUNCH?</h3>
-            <div className={styles.options}>
-              {LAUNCH_LOCATIONS.map((loc) => (
-                <button
-                  key={loc}
-                  className={`${styles.optionBtn} ${launchLocation === loc ? styles.optionSelected : ''}`}
-                  onClick={() => { setLaunchLocation(loc); setStep(2) }}
-                >
-                  {loc}
-                </button>
-              ))}
-            </div>
+          <div className={styles.progress}>
+            {[1, 2, 3, 4, 5, 6].map((s) => (
+              <div key={s} className={`${styles.dot} ${step >= s ? styles.dotActive : ''}`} />
+            ))}
           </div>
-        )}
 
-        {step === 2 && (
-          <div className={styles.stepContent}>
-            <h3 className={styles.stepTitle}>WHAT TYPE OF FISHING?</h3>
-            <div className={styles.options}>
-              <button
-                className={`${styles.optionBtn} ${fishingType === 'inshore' ? styles.optionSelected : ''}`}
-                onClick={() => { setFishingType('inshore'); setStep(3) }}
-              >
-                <span className={styles.optionName}>INSHORE</span>
-                <span className={styles.optionSub}>Rivers, lagoon & intracoastal</span>
-              </button>
-              <button
-                className={`${styles.optionBtn} ${fishingType === 'nearshore' ? styles.optionSelected : ''}`}
-                onClick={() => { setFishingType('nearshore'); setStep(3) }}
-              >
-                <span className={styles.optionName}>NEARSHORE &amp; OFFSHORE</span>
-                <span className={styles.optionSub}>Ocean — within 3 mi &amp; beyond</span>
-              </button>
-            </div>
-            <button className={styles.backBtn} onClick={() => setStep(1)}>← Back</button>
-          </div>
-        )}
-
-        {step === 3 && (
-          <div className={styles.stepContent}>
-            <h3 className={styles.stepTitle}>CHOOSE YOUR TRIP</h3>
-            <div className={styles.options}>
-              {trips.map((t) => (
-                <button
-                  key={t.title}
-                  className={`${styles.optionBtn} ${selectedTrip === t.title ? styles.optionSelected : ''}`}
-                  onClick={() => { setSelectedTrip(t.title); setStep(4) }}
-                >
-                  <span className={styles.optionName}>{t.title}</span>
-                  <span className={styles.optionPrice}>{t.price}</span>
-                  {'note' in t && <span className={styles.optionSub}>{(t as { note: string }).note}</span>}
-                </button>
-              ))}
-            </div>
-            <button className={styles.backBtn} onClick={() => setStep(2)}>← Back</button>
-          </div>
-        )}
-
-        {step === 4 && (
-          <div className={styles.stepContent}>
-            <h3 className={styles.stepTitle}>YOUR DETAILS</h3>
-            <div className={styles.form}>
-              <input
-                className={styles.input}
-                type="text"
-                placeholder="Your Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <input
-                className={styles.input}
-                type="tel"
-                placeholder="Phone Number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-              <input
-                className={styles.input}
-                type="date"
-                placeholder="Preferred Date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-              />
-              <textarea
-                className={styles.textarea}
-                placeholder="Any questions or notes?"
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-              />
-              <a
-                href={`tel:5551234567`}
-                className={`btn btn-primary ${styles.submitBtn}`}
-                onClick={() => setStep(5)}
-              >
-                CALL TO BOOK
-              </a>
-            </div>
-            <button className={styles.backBtn} onClick={() => setStep(3)}>← Back</button>
-          </div>
-        )}
-
-        {step === 5 && (
-          <div className={styles.stepContent}>
-            <div className={styles.confirm}>
-              <div className={styles.confirmIcon}>✓</div>
-              <h3 className={styles.stepTitle}>YOU&apos;RE ALL SET</h3>
-              <p className={styles.confirmText}>
-                Captain CJ will reach out to confirm your booking.
-              </p>
-              <div className={styles.summary}>
-                <div className={styles.summaryRow}><span>Launch</span><span>{launchLocation}</span></div>
-                <div className={styles.summaryRow}><span>Type</span><span>{fishingType === 'inshore' ? 'Inshore' : 'Nearshore & Offshore'}</span></div>
-                <div className={styles.summaryRow}><span>Trip</span><span>{selectedTrip}</span></div>
-                {date && <div className={styles.summaryRow}><span>Date</span><span>{date}</span></div>}
+          {step === 1 && (
+            <div className={styles.stepContent}>
+              <h3 className={styles.stepTitle}>WHERE DO YOU WANT TO LAUNCH?</h3>
+              <div className={styles.options}>
+                {LAUNCH_LOCATIONS.map((loc) => (
+                  <button
+                    key={loc}
+                    className={`${styles.optionBtn} ${launchLocation === loc ? styles.optionSelected : ''}`}
+                    onClick={() => { setLaunchLocation(loc); setStep(2) }}
+                  >
+                    {loc}
+                  </button>
+                ))}
               </div>
-              <button className={`btn btn-primary ${styles.doneBtn}`} onClick={close}>DONE</button>
             </div>
-          </div>
-        )}
+          )}
+
+          {step === 2 && (
+            <div className={styles.stepContent}>
+              <h3 className={styles.stepTitle}>WHAT TYPE OF FISHING?</h3>
+              <div className={styles.options}>
+                <button
+                  className={`${styles.optionBtn} ${fishingType === 'inshore' ? styles.optionSelected : ''}`}
+                  onClick={() => { setFishingType('inshore'); setStep(3) }}
+                >
+                  <span className={styles.optionName}>INSHORE</span>
+                  <span className={styles.optionSub}>Rivers, lagoon & intracoastal</span>
+                </button>
+                <button
+                  className={`${styles.optionBtn} ${fishingType === 'nearshore' ? styles.optionSelected : ''}`}
+                  onClick={() => { setFishingType('nearshore'); setStep(3) }}
+                >
+                  <span className={styles.optionName}>NEARSHORE &amp; OFFSHORE</span>
+                  <span className={styles.optionSub}>Ocean — within 3 mi &amp; beyond</span>
+                </button>
+              </div>
+              <button className={styles.backBtn} onClick={() => setStep(1)}>← Back</button>
+            </div>
+          )}
+
+          {step === 3 && (
+            <div className={styles.stepContent}>
+              <h3 className={styles.stepTitle}>CHOOSE YOUR TRIP</h3>
+              <div className={styles.options}>
+                {trips.map((t) => (
+                  <button
+                    key={t.title}
+                    className={`${styles.optionBtn} ${selectedTrip === t.title ? styles.optionSelected : ''}`}
+                    onClick={() => { setSelectedTrip(t.title); setSelectedPrice(t.price); setStep(4) }}
+                  >
+                    <span className={styles.optionName}>{t.title}</span>
+                    <span className={styles.optionPrice}>{t.display}</span>
+                    {'note' in t && <span className={styles.optionSub}>{(t as { note: string }).note}</span>}
+                  </button>
+                ))}
+              </div>
+              <button className={styles.backBtn} onClick={() => setStep(2)}>← Back</button>
+            </div>
+          )}
+
+          {step === 4 && (
+            <div className={styles.stepContent}>
+              <h3 className={styles.stepTitle}>PICK YOUR DATE & TIME</h3>
+              <div className={styles.form}>
+                <label className={styles.label}>Date</label>
+                <input
+                  className={styles.input}
+                  type="date"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+                  min={new Date().toISOString().split('T')[0]}
+                />
+
+                <label className={styles.label} style={{ marginTop: '20px' }}>Time</label>
+                <div className={styles.timeGrid}>
+                  {TIME_SLOTS.map((slot) => (
+                    <button
+                      key={slot}
+                      className={`${styles.timeSlot} ${time === slot ? styles.timeSlotSelected : ''}`}
+                      onClick={() => setTime(slot)}
+                    >
+                      {slot}
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  className={`btn btn-primary ${styles.nextBtn}`}
+                  onClick={() => setStep(5)}
+                  disabled={!date || !time}
+                >
+                  NEXT
+                </button>
+              </div>
+              <button className={styles.backBtn} onClick={() => setStep(3)}>← Back</button>
+            </div>
+          )}
+
+          {step === 5 && (
+            <div className={styles.stepContent}>
+              <h3 className={styles.stepTitle}>YOUR CONTACT INFO</h3>
+              <div className={styles.form}>
+                <input
+                  className={styles.input}
+                  type="text"
+                  placeholder="Your Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <input
+                  className={styles.input}
+                  type="tel"
+                  placeholder="Phone Number"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+                <textarea
+                  className={styles.textarea}
+                  placeholder="Any questions or notes? (optional)"
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                />
+                <button
+                  className={`btn btn-primary ${styles.nextBtn}`}
+                  onClick={() => setStep(6)}
+                  disabled={!name || !phone}
+                >
+                  NEXT
+                </button>
+              </div>
+              <button className={styles.backBtn} onClick={() => setStep(4)}>← Back</button>
+            </div>
+          )}
+
+          {step === 6 && (
+            <div className={styles.stepContent}>
+              <div className={styles.confirm}>
+                <h3 className={styles.stepTitle}>CONFIRM & PAY</h3>
+                <div className={styles.summary}>
+                  <div className={styles.summaryRow}><span>Launch</span><span>{launchLocation}</span></div>
+                  <div className={styles.summaryRow}><span>Type</span><span>{fishingType === 'inshore' ? 'Inshore' : 'Nearshore & Offshore'}</span></div>
+                  <div className={styles.summaryRow}><span>Trip</span><span>{selectedTrip}</span></div>
+                  <div className={styles.summaryRow}><span>Date</span><span>{date}</span></div>
+                  <div className={styles.summaryRow}><span>Time</span><span>{time}</span></div>
+                  <div className={styles.summaryRow}><span>Name</span><span>{name}</span></div>
+                  <div className={styles.summaryRow}><span>Phone</span><span>{phone}</span></div>
+                  <div className={`${styles.summaryRow} ${styles.summaryTotal}`}>
+                    <span>Total</span>
+                    <span>${selectedPrice}</span>
+                  </div>
+                </div>
+                <button className={`btn btn-primary ${styles.payBtn}`} onClick={handlePayment}>
+                  PAY ${selectedPrice}
+                </button>
+                <p className={styles.secureNote}>Secure payment via Stripe</p>
+              </div>
+              <button className={styles.backBtn} onClick={() => setStep(5)}>← Back</button>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
