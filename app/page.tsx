@@ -4,6 +4,7 @@ import { About } from '@/components/About'
 import { Stats } from '@/components/Stats'
 import { Trips } from '@/components/Trips'
 import { FishingTypes } from '@/components/FishingTypes'
+import { Gallery } from '@/components/Gallery'
 import { WhatsIncluded } from '@/components/WhatsIncluded'
 import { Boat } from '@/components/Boat'
 import { WhatToBring } from '@/components/WhatToBring'
@@ -23,6 +24,7 @@ export default function Home() {
         <Stats />
         <Trips />
         <FishingTypes />
+        <Gallery />
         <WhatsIncluded />
         <Boat />
         <WhatToBring />

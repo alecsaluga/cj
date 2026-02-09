@@ -1,0 +1,102 @@
+.section {
+  overflow: hidden;
+}
+
+.carouselContainer {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.navButton {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+  color: var(--white);
+  font-size: 32px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.navButton:hover {
+  background: var(--cyan);
+  color: var(--black);
+}
+
+.navButtonPrev {
+  order: 0;
+}
+
+.navButtonNext {
+  order: 2;
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.15);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.dot:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dotActive {
+  background: var(--cyan);
+}
+
+.counter {
+  text-align: center;
+  margin-top: 12px;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  opacity: 0.5;
+}
+
+@media (max-width: 640px) {
+  .navButton {
+    width: 40px;
+    height: 40px;
+    font-size: 28px;
+  }
+
+  .carouselContainer {
+    gap: 8px;
+  }
+}

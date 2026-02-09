@@ -6,7 +6,7 @@ import styles from './FishingTypes.module.css'
 
 const inshoreFish = [
   { name: 'Tarpon', src: '/fish/inshore/tarpon.png' },
-  { name: 'Snook', src: '/fish/inshore/snapper.jpeg' },
+  { name: 'Snapper', src: '/fish/inshore/snapper.jpeg' },
   { name: 'Pompano', src: '/fish/inshore/pompano.png' },
   { name: 'Permit', src: '/fish/inshore/permit.jpeg' },
   { name: 'Bonefish', src: '/fish/inshore/bonefish.png' },
