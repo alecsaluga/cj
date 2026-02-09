@@ -22,8 +22,8 @@ export default function Home() {
         <Hero />
         <About />
         <Stats />
-        <Trips />
         <FishingTypes />
+        <Trips />
         <Gallery />
         <WhatsIncluded />
         <Boat />

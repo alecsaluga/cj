@@ -78,9 +78,9 @@ export function BookingModal() {
     // Stripe Payment Links
     const stripeLinks: Record<number, string> = {
       400: 'https://buy.stripe.com/28E6oH1NUdkMepR6zP0gw0h',
-      450: 'https://buy.stripe.com/00wbJ1akqbcE1D58HX0gw0i',
+      450: 'https://buy.stripe.com/28E00jeAG3KcchJ3nD0gw0k',
       550: 'https://buy.stripe.com/eVqeVd1NUcgI95xf6l0gw0j',
-      600: 'https://buy.stripe.com/YOUR_600_LINK', // TODO: Replace with actual payment link (not dashboard link)
+      600: 'https://buy.stripe.com/00wbJ1akqbcE1D58HX0gw0i',
     }
 
     const stripeUrl = stripeLinks[selectedPrice]

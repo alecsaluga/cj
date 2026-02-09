@@ -39,6 +39,17 @@ export function FishingTypes() {
           <h2 className={styles.headline}>TYPES OF TRIPS</h2>
         </div>
 
+        <div className={styles.heroImage}>
+          <Image
+            src="/inshore-vs-offshore.png"
+            alt="Inshore vs Offshore fishing comparison"
+            width={1200}
+            height={600}
+            className={styles.comparisonImage}
+            priority
+          />
+        </div>
+
         <div className={styles.tabs}>
           <button
             className={`${styles.tab} ${activeTab === 'inshore' ? styles.tabActive : ''}`}
