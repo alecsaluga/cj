@@ -337,6 +337,49 @@
   }
 }
 
+/* Override react-datepicker styles for dark theme */
+:global(.react-datepicker) {
+  background-color: var(--black) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  font-family: var(--font-body) !important;
+}
+
+:global(.react-datepicker__header) {
+  background-color: var(--black) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+:global(.react-datepicker__current-month),
+:global(.react-datepicker__day-name) {
+  color: var(--white) !important;
+}
+
+:global(.react-datepicker__day) {
+  color: var(--white) !important;
+}
+
+:global(.react-datepicker__day:hover) {
+  background-color: rgba(0, 212, 255, 0.2) !important;
+}
+
+:global(.react-datepicker__day--selected),
+:global(.react-datepicker__day--keyboard-selected) {
+  background-color: var(--cyan) !important;
+  color: var(--black) !important;
+}
+
+:global(.react-datepicker__day--disabled) {
+  color: rgba(255, 255, 255, 0.3) !important;
+}
+
+:global(.react-datepicker__navigation-icon::before) {
+  border-color: var(--white) !important;
+}
+
+:global(.react-datepicker__navigation:hover *::before) {
+  border-color: var(--cyan) !important;
+}
+
 @media (max-width: 480px) {
   .timeGrid {
     grid-template-columns: repeat(2, 1fr);

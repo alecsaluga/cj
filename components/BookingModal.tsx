@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 import styles from './BookingModal.module.css'
 
 const LAUNCH_LOCATIONS = ['Jensen Beach', 'Fort Pierce', 'Stuart', 'Other']
@@ -29,7 +31,7 @@ export function BookingModal() {
   const [fishingType, setFishingType] = useState('')
   const [selectedTrip, setSelectedTrip] = useState('')
   const [selectedPrice, setSelectedPrice] = useState(0)
-  const [date, setDate] = useState('')
+  const [date, setDate] = useState<Date | null>(null)
   const [time, setTime] = useState('')
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
@@ -43,7 +45,7 @@ export function BookingModal() {
       setFishingType('')
       setSelectedTrip('')
       setSelectedPrice(0)
-      setDate('')
+      setDate(null)
       setTime('')
       setName('')
       setPhone('')
@@ -64,7 +66,7 @@ export function BookingModal() {
       fishingType: fishingType === 'inshore' ? 'Inshore' : 'Nearshore & Offshore',
       trip: selectedTrip,
       price: selectedPrice,
-      date,
+      date: date ? date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '',
       time,
       name,
       phone,
@@ -193,12 +195,14 @@ export function BookingModal() {
               <h3 className={styles.stepTitle}>PICK YOUR DATE & TIME</h3>
               <div className={styles.form}>
                 <label className={styles.label}>Date</label>
-                <input
+                <DatePicker
+                  selected={date}
+                  onChange={(d: Date | null) => setDate(d)}
+                  minDate={new Date()}
+                  dateFormat="MMMM d, yyyy"
+                  placeholderText="Select a date"
                   className={styles.input}
-                  type="date"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                  min={new Date().toISOString().split('T')[0]}
+                  calendarClassName={styles.calendar}
                 />
 
                 <label className={styles.label} style={{ marginTop: '20px' }}>Time</label>
@@ -270,7 +274,7 @@ export function BookingModal() {
                   <div className={styles.summaryRow}><span>Launch</span><span>{launchLocation}</span></div>
                   <div className={styles.summaryRow}><span>Type</span><span>{fishingType === 'inshore' ? 'Inshore' : 'Nearshore & Offshore'}</span></div>
                   <div className={styles.summaryRow}><span>Trip</span><span>{selectedTrip}</span></div>
-                  <div className={styles.summaryRow}><span>Date</span><span>{date}</span></div>
+                  <div className={styles.summaryRow}><span>Date</span><span>{date ? date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : ''}</span></div>
                   <div className={styles.summaryRow}><span>Time</span><span>{time}</span></div>
                   <div className={styles.summaryRow}><span>Name</span><span>{name}</span></div>
                   <div className={styles.summaryRow}><span>Phone</span><span>{phone}</span></div>

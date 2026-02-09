@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@types/mapbox-gl": "^3.4.1",
+    "@types/react-datepicker": "^6.2.0",
     "mapbox-gl": "^3.18.1",
     "next": "^16.1.6",
     "react": "^19.2.4",
+    "react-datepicker": "^9.1.0",
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
