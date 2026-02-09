@@ -268,6 +268,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 13px;
+  color: var(--white);
 }
 
 .summaryRow span:first-child {
@@ -275,10 +276,12 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  color: var(--white);
 }
 
 .summaryRow span:last-child {
   font-weight: 700;
+  color: var(--white);
 }
 
 .summaryTotal {

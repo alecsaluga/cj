@@ -7,7 +7,6 @@ import { FishingTypes } from '@/components/FishingTypes'
 import { Gallery } from '@/components/Gallery'
 import { WhatsIncluded } from '@/components/WhatsIncluded'
 import { Boat } from '@/components/Boat'
-import { WhatToBring } from '@/components/WhatToBring'
 import { LaunchMap } from '@/components/LaunchMap'
 import { Policies } from '@/components/Policies'
 import { BookingCTA } from '@/components/BookingCTA'
@@ -27,7 +26,6 @@ export default function Home() {
         <Gallery />
         <WhatsIncluded />
         <Boat />
-        <WhatToBring />
         <LaunchMap />
         <Policies />
         <BookingCTA />

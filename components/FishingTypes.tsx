@@ -33,7 +33,7 @@ export function FishingTypes() {
   const fish = activeTab === 'inshore' ? inshoreFish : nearshoreFish
 
   return (
-    <section className={`section bg-cream ${styles.section}`}>
+    <section className={`section bg-black ${styles.section}`}>
       <div className="container">
         <div className="text-center mb-xl">
           <h2 className={styles.headline}>TYPES OF TRIPS</h2>
