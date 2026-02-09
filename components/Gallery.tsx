@@ -10,14 +10,10 @@ const PHOTOS = [
   '/gallery/IMG_4513.jpg',
   '/gallery/IMG_4591.jpg',
   '/gallery/IMG_4606.jpg',
-  '/gallery/IMG_4612.jpg',
   '/gallery/IMG_4689.jpg',
-  '/gallery/IMG_4694.jpeg',
-  '/gallery/IMG_6460.jpg',
   '/gallery/IMG_6462.jpg',
   '/gallery/IMG_6484.jpeg',
   '/gallery/IMG_8109.jpg',
-  '/gallery/IMG_8486.jpg',
   '/gallery/image000001.jpg',
 ]
 
