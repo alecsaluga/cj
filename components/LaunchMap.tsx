@@ -5,8 +5,8 @@ import styles from './LaunchMap.module.css'
 
 const LAUNCH_LOCATIONS = [
   { name: 'Jensen Beach', lng: -80.2284, lat: 27.2572 },
-  { name: 'Vero Beach', lng: -80.3959, lat: 27.6386 },
-  { name: 'Jupiter', lng: -80.0939, lat: 26.9342 },
+  { name: 'Fort Pierce', lng: -80.3256, lat: 27.4467 },
+  { name: 'Stuart', lng: -80.2528, lat: 27.1975 },
 ]
 
 export function LaunchMap() {
@@ -25,8 +25,8 @@ export function LaunchMap() {
       const map = new mapboxgl.default.Map({
         container: mapContainer.current!,
         style: 'mapbox://styles/mapbox/dark-v11',
-        center: [-80.25, 27.3],
-        zoom: 7.8,
+        center: [-80.27, 27.3],
+        zoom: 9.2,
         attributionControl: false,
       })
 

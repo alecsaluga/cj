@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import styles from './BookingModal.module.css'
 
-const LAUNCH_LOCATIONS = ['Jensen Beach', 'Faro Blanco', 'Jupiter', 'Other']
+const LAUNCH_LOCATIONS = ['Jensen Beach', 'Fort Pierce', 'Stuart', 'Other']
 
 const INSHORE_TRIPS = [
   { title: '4 Hour Inshore Fishing', price: '$400' },

@@ -12,7 +12,7 @@ export function Hero() {
           EXPERIENCE
         </h1>
         <p className={styles.subheadline}>
-          Launch from Jensen Beach, Vero Beach, Jupiter, and more
+          Launch from Jensen Beach, Fort Pierce, Stuart, and more
         </p>
         <button
           className="btn btn-primary btn-large"
