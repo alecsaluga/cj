@@ -108,7 +108,7 @@
 
 .optionSub {
   font-size: 12px;
-  opacity: 0.5;
+  opacity: 0.8;
   margin-top: 4px;
   font-weight: 400;
   text-transform: none;
@@ -126,7 +126,7 @@
   background: none;
   border: none;
   color: var(--white);
-  opacity: 0.5;
+  opacity: 0.8;
   cursor: pointer;
   font-family: var(--font-display);
   font-size: 13px;
@@ -155,7 +155,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--white);
-  opacity: 0.6;
+  opacity: 0.9;
   margin-bottom: -4px;
 }
 
@@ -174,7 +174,8 @@
 
 .input::placeholder,
 .textarea::placeholder {
-  opacity: 0.4;
+  color: var(--white);
+  opacity: 0.9;
 }
 
 .input:focus,
@@ -247,7 +248,7 @@
 }
 
 .confirmText {
-  opacity: 0.6;
+  opacity: 0.9;
   margin-bottom: 28px;
   font-size: 15px;
   line-height: 1.6;
@@ -272,7 +273,7 @@
 }
 
 .summaryRow span:first-child {
-  opacity: 0.5;
+  opacity: 0.8;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -298,7 +299,7 @@
 
 .secureNote {
   font-size: 12px;
-  opacity: 0.5;
+  opacity: 0.8;
   margin-top: 12px;
 }
 

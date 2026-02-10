@@ -89,23 +89,11 @@ export function BookingModal() {
     }
   }
 
-  // Check for successful payment on mount
+  // Redirect to confirmation page after successful payment
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
     if (urlParams.get('payment') === 'success') {
-      const pendingBooking = localStorage.getItem('pendingBooking')
-      if (pendingBooking) {
-        // Send to webhook
-        fetch('https://n8n.alecautomations.com/webhook/27d5dc31-8f82-4bdf-8f51-f055a7d3d4eb', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: pendingBooking,
-        }).then(() => {
-          localStorage.removeItem('pendingBooking')
-          // Clean up URL
-          window.history.replaceState({}, '', window.location.pathname)
-        })
-      }
+      window.location.href = '/booking-confirmation'
     }
   }, [])
 
