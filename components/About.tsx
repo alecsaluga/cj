@@ -26,12 +26,9 @@ export function About() {
                 At 1 Fathom Sportfishing Charters, you're not just booking another fishing trip—you're booking an experience you'll remember for life. Captain CJ takes it upon himself to make sure you experience all that South Florida's inshore and offshore waterways have to offer.
               </p>
               <p>
-                From incredible scenery and wildlife to some of the best fishing in Florida, every trip is an immersive adventure. Operating a versatile 20' NauticStar bay boat, Captain CJ keeps groups small (up to 2 guests) so you get personalized attention at a fraction of the cost of larger charters.
+                From incredible scenery and wildlife to some of the best fishing in Florida, every trip is an immersive adventure. Operating a versatile 20' NauticStar bay boat, Captain CJ keeps groups small (up to 3 guests) so you get personalized attention at a fraction of the cost of larger charters.
               </p>
             </div>
-            <a href="#contact" className={styles.link}>
-              MEET CAPTAIN CJ →
-            </a>
           </div>
         </div>
       </div>

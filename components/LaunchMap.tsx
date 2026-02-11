@@ -28,9 +28,23 @@ export function LaunchMap() {
         center: [-80.27, 27.3],
         zoom: 9.2,
         attributionControl: false,
+        scrollZoom: false,
+        dragPan: false,
+        touchZoomRotate: false,
+        doubleClickZoom: false,
       })
 
       map.addControl(new mapboxgl.default.AttributionControl({ compact: true }))
+
+      // Disable interactions on mobile to prevent users getting stuck
+      const enableDesktopInteractions = () => {
+        if (window.innerWidth >= 768) {
+          map.scrollZoom.enable()
+          map.dragPan.enable()
+        }
+      }
+      enableDesktopInteractions()
+      window.addEventListener('resize', enableDesktopInteractions)
 
       LAUNCH_LOCATIONS.forEach((loc) => {
         const el = document.createElement('div')

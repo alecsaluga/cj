@@ -11,7 +11,7 @@ export function Footer() {
               South Florida's Best<br />
               Fishing Experience
             </p>
-            <p className={styles.location}>Stuart, FL</p>
+            <p className={styles.location}>Jensen Beach, Florida</p>
           </div>
 
           <div className={styles.links}>
@@ -28,9 +28,9 @@ export function Footer() {
           <div className={styles.contactInfo}>
             <h4 className={styles.heading}>CONTACT</h4>
             <div className={styles.contactDetails}>
-              <p>📍 Stuart, FL</p>
-              <p>📞 <a href="tel:5551234567">(555) 123-4567</a></p>
-              <p>✉️ <a href="mailto:captain@1fathom.com">captain@1fathom.com</a></p>
+              <p>📍 Jensen Beach, Florida</p>
+              <p>📞 <a href="tel:4129794505">(412) 979-4505</a></p>
+              <p>✉️ <a href="mailto:salugac@gmail.com">salugac@gmail.com</a></p>
             </div>
             <div className={styles.social}>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">

@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
   }
 
   const title = `Fishing Charters in ${city.name}, ${city.state} | 1 Fathom Sportfishing`
-  const description = `Book an affordable fishing charter in ${city.name}, FL with Captain CJ. ${city.description} Call (555) 123-4567 to book your trip today!`
+  const description = `Book an affordable fishing charter in ${city.name}, FL with Captain CJ. ${city.description} Call (412) 979-4505 to book your trip today!`
 
   return {
     title,
@@ -85,7 +85,7 @@ export default function CityPage({ params }: CityPageProps) {
             provider: {
               '@type': 'LocalBusiness',
               name: '1 Fathom Sportfishing Charters',
-              telephone: '+1-555-123-4567',
+              telephone: '+1-412-979-4505',
             },
             areaServed: {
               '@type': 'City',
@@ -125,7 +125,7 @@ export default function CityPage({ params }: CityPageProps) {
               </h1>
               <p className={styles.subheadline}>
                 Experience world-class fishing with Captain CJ.<br />
-                Affordable charters for up to 2 guests.
+                Affordable charters for up to 3 guests.
               </p>
               <a href="#booking" className="btn btn-primary btn-large">
                 BOOK YOUR TRIP
@@ -170,7 +170,7 @@ export default function CityPage({ params }: CityPageProps) {
                     <strong>Trip Duration:</strong> 4-6 hours
                   </div>
                   <div className={styles.factItem}>
-                    <strong>Max Guests:</strong> 2 people
+                    <strong>Max Guests:</strong> 3 people
                   </div>
                   <div className={styles.factItem}>
                     <strong>Starting Price:</strong> $400
@@ -262,7 +262,7 @@ export default function CityPage({ params }: CityPageProps) {
               <div className={`card ${styles.benefit}`}>
                 <div className={styles.benefitIcon}>🌟</div>
                 <h4>PERSONALIZED EXPERIENCE</h4>
-                <p>With only 1-2 guests per trip, you get Captain CJ's full attention.</p>
+                <p>With only 1-3 guests per trip, you get Captain CJ's full attention.</p>
               </div>
             </div>
           </div>
@@ -277,11 +277,11 @@ export default function CityPage({ params }: CityPageProps) {
             <p style={{ fontSize: '20px', color: 'white', opacity: 0.8, marginBottom: '48px' }}>
               Book your charter today and experience the best fishing {city.name} has to offer.
             </p>
-            <a href="tel:5551234567" className="btn btn-primary btn-large">
-              CALL (555) 123-4567 TO BOOK
+            <a href="tel:4129794505" className="btn btn-primary btn-large">
+              CALL (412) 979-4505 TO BOOK
             </a>
             <p style={{ fontSize: '16px', color: 'white', opacity: 0.7, marginTop: '32px' }}>
-              Or email: <a href="mailto:captain@1fathom.com" style={{ color: 'var(--cyan)' }}>captain@1fathom.com</a>
+              Or email: <a href="mailto:salugac@gmail.com" style={{ color: 'var(--cyan)' }}>salugac@gmail.com</a>
             </p>
           </div>
         </section>
@@ -314,9 +314,9 @@ export default function CityPage({ params }: CityPageProps) {
               </div>
 
               <div className={styles.faqItem}>
-                <h4>How many people can go on a charter?</h4>
+<h4>How many people can go on a charter?</h4>
                 <p>
-                  Our charters accommodate 1-2 guests for a personalized fishing experience. Small groups mean more attention from Captain CJ and better fishing opportunities.
+                  Our charters accommodate 1-3 guests for a personalized fishing experience. Small groups mean more attention from Captain CJ and better fishing opportunities.
                 </p>
               </div>
 

@@ -23,7 +23,7 @@ export function BookingCTA() {
         </button>
 
         <p className={styles.contact}>
-          Questions? Call or text: <a href="tel:5551234567">(555) 123-4567</a>
+          Questions? Call or text: <a href="tel:4129794505">(412) 979-4505</a>
         </p>
       </div>
     </section>

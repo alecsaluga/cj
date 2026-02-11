@@ -74,7 +74,7 @@ export default function RootLayout({
                 longitude: -80.2528,
               },
               url: 'https://1fathom.com',
-              telephone: '+1-555-123-4567',
+              telephone: '+1-412-979-4505',
               priceRange: '$$',
               openingHoursSpecification: [
                 {
