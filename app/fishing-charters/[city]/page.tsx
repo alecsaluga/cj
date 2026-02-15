@@ -12,6 +12,10 @@ interface CityPageProps {
   }
 }
 
+// Force static generation for all city pages
+export const dynamic = 'force-static'
+export const dynamicParams = false
+
 export async function generateStaticParams() {
   const slugs = getAllCitySlugs()
   return slugs.map((slug) => ({
