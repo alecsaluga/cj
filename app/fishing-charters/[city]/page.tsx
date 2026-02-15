@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
     openGraph: {
       title,
       description,
-      url: `https://1fathom.com/fishing-charters/${city.slug}`,
+      url: `https://onefathomfishingcharter.com/fishing-charters/${city.slug}`,
       siteName: '1 Fathom Sportfishing Charters',
       images: [
         {
@@ -58,7 +58,7 @@ export async function generateMetadata({ params }: CityPageProps): Promise<Metad
       images: ['https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=630'],
     },
     alternates: {
-      canonical: `https://1fathom.com/fishing-charters/${city.slug}`,
+      canonical: `https://onefathomfishingcharter.com/fishing-charters/${city.slug}`,
     },
   }
 }

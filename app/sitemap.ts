@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { getAllCitySlugs } from '@/data/cities'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://1fathom.com'
+  const baseUrl = 'https://onefathomfishingcharter.com'
 
   // Main pages
   const mainPages = [

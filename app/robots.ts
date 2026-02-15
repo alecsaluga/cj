@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/admin/'],
     },
-    sitemap: 'https://1fathom.com/sitemap.xml',
+    sitemap: 'https://onefathomfishingcharter.com/sitemap.xml',
   }
 }

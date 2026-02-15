@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: '1 Fathom Sportfishing | Treasure Coast',
     description: 'Inshore, nearshore & offshore fishing charters with Captain CJ. Launching from Jensen Beach, Vero Beach, Jupiter & more.',
-    url: 'https://1fathom.com',
+    url: 'https://onefathomfishingcharter.com',
     siteName: '1 Fathom Sportfishing Charters',
     locale: 'en_US',
     type: 'website',
@@ -46,7 +46,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="canonical" href="https://1fathom.com" />
+        <link rel="canonical" href="https://onefathomfishingcharter.com" />
 
         {/* Structured Data for SEO */}
         <Script
@@ -56,7 +56,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'LocalBusiness',
-              '@id': 'https://1fathom.com',
+              '@id': 'https://onefathomfishingcharter.com',
               name: '1 Fathom Sportfishing Charters',
               image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=630',
               description: 'Affordable fishing charters in Stuart, FL with Captain CJ. Small group trips on a 20\' NauticStar.',
@@ -73,7 +73,7 @@ export default function RootLayout({
                 latitude: 27.1975,
                 longitude: -80.2528,
               },
-              url: 'https://1fathom.com',
+              url: 'https://onefathomfishingcharter.com',
               telephone: '+1-412-979-4505',
               priceRange: '$$',
               aggregateRating: {
