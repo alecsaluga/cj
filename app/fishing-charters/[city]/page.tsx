@@ -112,6 +112,67 @@ export default function CityPage({ params }: CityPageProps) {
         }}
       />
 
+      <Script
+        id={`faq-schema-${city.slug}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            'mainEntity': [
+              {
+                '@type': 'Question',
+                'name': `What kind of fish can I catch in ${city.name}?`,
+                'acceptedAnswer': {
+                  '@type': 'Answer',
+                  'text': `In ${city.name}, you can target ${city.fishSpecies.slice(0, 3).join(', ')}, and many other species depending on the season and location.`
+                }
+              },
+              {
+                '@type': 'Question',
+                'name': `How much does a fishing charter cost in ${city.name}?`,
+                'acceptedAnswer': {
+                  '@type': 'Answer',
+                  'text': `Our ${city.name} fishing charters start at $400 for a 4-hour inshore trip. We offer affordable rates with all equipment, bait, and licenses included.`
+                }
+              },
+              {
+                '@type': 'Question',
+                'name': `What's the best time of year to fish in ${city.name}?`,
+                'acceptedAnswer': {
+                  '@type': 'Answer',
+                  'text': city.bestSeason
+                }
+              },
+              {
+                '@type': 'Question',
+                'name': 'How many people can go on a charter?',
+                'acceptedAnswer': {
+                  '@type': 'Answer',
+                  'text': 'Our charters accommodate 1-3 guests for a personalized fishing experience. Small groups mean more attention from Captain CJ and better fishing opportunities.'
+                }
+              },
+              {
+                '@type': 'Question',
+                'name': 'What\'s included in the charter price?',
+                'acceptedAnswer': {
+                  '@type': 'Answer',
+                  'text': 'All charters include rods, reels, tackle, live bait (when available), fishing license, water, ice, and catch cleaning/filleting. You just need to bring yourself!'
+                }
+              },
+              {
+                '@type': 'Question',
+                'name': `Do you pick up from ${city.name}?`,
+                'acceptedAnswer': {
+                  '@type': 'Answer',
+                  'text': `Pickup locations may vary based on the trip and location. ${city.distanceFromStuart === 'Home port' ? `We're based in ${city.name}.` : `We're located ${city.distanceFromStuart} of ${city.name}.`} Contact us to discuss pickup options.`
+                }
+              }
+            ]
+          }),
+        }}
+      />
+
       <Header />
       <main>
         {/* Hero Section */}

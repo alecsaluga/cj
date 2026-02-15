@@ -76,6 +76,13 @@ export default function RootLayout({
               url: 'https://1fathom.com',
               telephone: '+1-412-979-4505',
               priceRange: '$$',
+              aggregateRating: {
+                '@type': 'AggregateRating',
+                'ratingValue': '5.0',
+                'reviewCount': '12',
+                'bestRating': '5',
+                'worstRating': '1'
+              },
               openingHoursSpecification: [
                 {
                   '@type': 'OpeningHoursSpecification',
@@ -129,22 +136,52 @@ export default function RootLayout({
               offers: [
                 {
                   '@type': 'Offer',
-                  name: '4 Hour Inshore Fishing',
-                  price: '400',
-                  priceCurrency: 'USD',
+                  'name': '4 Hour Inshore Fishing Charter',
+                  'description': 'Perfect for targeting snook, redfish, and tarpon in the flats and backcountry waters of the Indian River Lagoon and Intracoastal Waterway.',
+                  'price': '400',
+                  'priceCurrency': 'USD',
+                  'availability': 'https://schema.org/InStock',
+                  'url': 'https://onefathomfishing.com',
+                  'category': 'Inshore Fishing'
                 },
                 {
                   '@type': 'Offer',
-                  name: '4 Hour Near Shore Fishing',
-                  price: '450',
-                  priceCurrency: 'USD',
+                  'name': '6 Hour Inshore Fishing Charter',
+                  'description': 'Extended inshore trip for serious anglers targeting trophy snook, redfish, tarpon, and more in South Florida backcountry waters.',
+                  'price': '550',
+                  'priceCurrency': 'USD',
+                  'availability': 'https://schema.org/InStock',
+                  'url': 'https://onefathomfishing.com',
+                  'category': 'Inshore Fishing'
                 },
                 {
                   '@type': 'Offer',
-                  name: '6 Hour Offshore Fishing',
-                  price: '600',
-                  priceCurrency: 'USD',
+                  'name': '4 Hour Nearshore Fishing Charter',
+                  'description': 'Venture into nearshore Atlantic waters for kingfish, cobia, Spanish mackerel, and more. Seasonal availability April through September.',
+                  'price': '450',
+                  'priceCurrency': 'USD',
+                  'availability': 'https://schema.org/LimitedAvailability',
+                  'availableAtOrFrom': {
+                    '@type': 'Place',
+                    'name': 'Available April 1 - September 1'
+                  },
+                  'url': 'https://onefathomfishing.com',
+                  'category': 'Nearshore Fishing'
                 },
+                {
+                  '@type': 'Offer',
+                  'name': '6 Hour Offshore/Nearshore Fishing Charter',
+                  'description': 'Extended offshore trip targeting sailfish, mahi-mahi, wahoo, kingfish, and other pelagic species. Seasonal availability April through September.',
+                  'price': '600',
+                  'priceCurrency': 'USD',
+                  'availability': 'https://schema.org/LimitedAvailability',
+                  'availableAtOrFrom': {
+                    '@type': 'Place',
+                    'name': 'Available April 1 - September 1'
+                  },
+                  'url': 'https://onefathomfishing.com',
+                  'category': 'Offshore Fishing'
+                }
               ],
             }),
           }}

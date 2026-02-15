@@ -43,6 +43,17 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Google Business Profile Map */}
+        <div className={styles.mapSection}>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d908593.3338204799!2d-81.11363719545186!3d27.181679330081366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x950ae2e629e65df%3A0xd2d186bbe39097c4!2s1%20Fathom%20Sportfishing%20Charters!5e0!3m2!1sen!2sus!4v1771171469838!5m2!1sen!2sus"
+            className={styles.mapEmbed}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="1 Fathom Sportfishing Charters Location"
+          />
+        </div>
+
         <div className={styles.bottom}>
           <p>© 2026 1 Fathom Sportfishing Charters</p>
           <a href="#privacy">Privacy Policy</a>

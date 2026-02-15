@@ -116,6 +116,20 @@
   color: var(--cyan);
 }
 
+.mapSection {
+  width: 100%;
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid var(--light-gray);
+}
+
+.mapEmbed {
+  width: 100%;
+  height: 200px;
+  border: 1px solid var(--light-gray);
+  border-radius: 0;
+}
+
 @media (min-width: 768px) {
   .grid {
     grid-template-columns: repeat(3, 1fr);
@@ -124,5 +138,9 @@
   .bottom {
     flex-direction: row;
     justify-content: space-between;
+  }
+
+  .mapEmbed {
+    height: 250px;
   }
 }
