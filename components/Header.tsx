@@ -29,7 +29,7 @@ export function Header() {
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
       <div className={styles.container}>
         <div className={styles.logoContainer}>
-          <a href="#hero" onClick={(e) => { e.preventDefault(); scrollToSection('hero') }} className={styles.logoLink}>
+          <a href="/" className={styles.logoLink}>
             <Image
               src="/fishing2.png"
               alt="1 Fathom Sportfishing Charters"

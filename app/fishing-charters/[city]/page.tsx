@@ -3,6 +3,10 @@ import { notFound } from 'next/navigation'
 import { getCityBySlug, getAllCitySlugs } from '@/data/cities'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
+import { BookingModal } from '@/components/BookingModal'
+import { Boat } from '@/components/Boat'
+import { WhatsIncluded } from '@/components/WhatsIncluded'
+import { CityTripsGrid } from './CityTripsGrid'
 import styles from './CityPage.module.css'
 import Script from 'next/script'
 
@@ -265,36 +269,7 @@ export default function CityPage({ params }: CityPageProps) {
               </p>
             </div>
 
-            <div className={styles.tripsGrid}>
-              <div className="card">
-                <h4>4 HOUR INSHORE FISHING</h4>
-                <div className={styles.price}>$400</div>
-                <p>Perfect for targeting snook, redfish, and tarpon in the flats and backcountry waters.</p>
-                <a href="#booking" className="btn btn-primary" style={{ width: '100%', marginTop: '24px' }}>
-                  BOOK NOW
-                </a>
-              </div>
-
-              <div className="card">
-                <h4>4 HOUR NEAR SHORE FISHING</h4>
-                <div className={styles.price}>$450</div>
-                <p className={styles.seasonal}>Seasonal: April 1 - September 1</p>
-                <p>Venture into nearshore waters for kingfish, cobia, and more.</p>
-                <a href="#booking" className="btn btn-primary" style={{ width: '100%', marginTop: '24px' }}>
-                  BOOK NOW
-                </a>
-              </div>
-
-              <div className="card">
-                <h4>6 HOUR OFFSHORE TRIP</h4>
-                <div className={styles.price}>$600</div>
-                <p className={styles.seasonal}>Seasonal: April 1 - September 1</p>
-                <p>Extended trip for serious anglers chasing sailfish, mahi, and wahoo.</p>
-                <a href="#booking" className="btn btn-primary" style={{ width: '100%', marginTop: '24px' }}>
-                  BOOK NOW
-                </a>
-              </div>
-            </div>
+            <CityTripsGrid cityName={city.name} />
           </div>
         </section>
 
@@ -333,23 +308,8 @@ export default function CityPage({ params }: CityPageProps) {
           </div>
         </section>
 
-        {/* Booking CTA */}
-        <section id="booking" className="section bg-black">
-          <div className="container text-center">
-            <h2 style={{ color: 'white', marginBottom: '24px' }}>
-              READY TO FISH {city.name.toUpperCase()}?
-            </h2>
-            <p style={{ fontSize: '20px', color: 'white', opacity: 0.8, marginBottom: '48px' }}>
-              Book your charter today and experience the best fishing {city.name} has to offer.
-            </p>
-            <a href="tel:4129794505" className="btn btn-primary btn-large">
-              CALL (412) 979-4505 TO BOOK
-            </a>
-            <p style={{ fontSize: '16px', color: 'white', opacity: 0.7, marginTop: '32px' }}>
-              Or email: <a href="mailto:salugac@gmail.com" style={{ color: 'var(--cyan)' }}>salugac@gmail.com</a>
-            </p>
-          </div>
-        </section>
+        <WhatsIncluded />
+        <Boat />
 
         {/* FAQ Section for SEO */}
         <section className="section bg-cream">
@@ -436,6 +396,7 @@ export default function CityPage({ params }: CityPageProps) {
         </section>
       </main>
       <Footer />
+      <BookingModal />
     </>
   )
 }
