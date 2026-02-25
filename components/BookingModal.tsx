@@ -8,13 +8,13 @@ import styles from './BookingModal.module.css'
 const LAUNCH_LOCATIONS = ['Jensen Beach', 'Fort Pierce', 'Stuart', 'Other']
 
 const INSHORE_TRIPS = [
-  { title: '4 Hour Inshore Fishing', price: 400, display: '$400' },
-  { title: '6 Hour Inshore Fishing', price: 550, display: '$550' },
+  { title: '4 Hour Inshore Fishing', price: 450, display: '$450' },
+  { title: '6 Hour Inshore Fishing', price: 600, display: '$600' },
 ]
 
 const NEARSHORE_TRIPS = [
-  { title: '4 Hour Nearshore Fishing', price: 450, display: '$450', note: 'Seasonal: Apr 1 – Sep 1' },
-  { title: '6 Hour Offshore/Nearshore', price: 600, display: '$600', note: 'Seasonal: Apr 1 – Sep 1' },
+  { title: '4 Hour Nearshore Fishing', price: 500, display: '$500', note: 'Seasonal: Apr 1 – Sep 1' },
+  { title: '6 Hour Offshore/Nearshore', price: 650, display: '$650', note: 'Seasonal: Apr 1 – Sep 1' },
 ]
 
 const TIME_SLOTS = [
@@ -77,10 +77,10 @@ export function BookingModal() {
 
     // Stripe Payment Links
     const stripeLinks: Record<number, string> = {
-      400: 'https://buy.stripe.com/28E6oH1NUdkMepR6zP0gw0h',
-      450: 'https://buy.stripe.com/28E00jeAG3KcchJ3nD0gw0k',
-      550: 'https://buy.stripe.com/cNi8wP8ci94w3Ld4rH0gw0l',
-      600: 'https://buy.stripe.com/00wbJ1akqbcE1D58HX0gw0i',
+      450: 'https://buy.stripe.com/14A4gz2RYdkM5TlbU90gw0p',
+      500: 'https://buy.stripe.com/14AbJ12RY0y06Xp1fv0gw0o',
+      600: 'https://buy.stripe.com/8x2dR9csy4OgbdF5vL0gw0n',
+      650: 'https://buy.stripe.com/6oUeVdfEKbcE3Ldgap0gw0m',
     }
 
     const stripeUrl = stripeLinks[selectedPrice]
