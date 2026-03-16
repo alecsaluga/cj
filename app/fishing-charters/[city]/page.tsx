@@ -141,7 +141,7 @@ export default function CityPage({ params }: CityPageProps) {
                 'name': `How much does a fishing charter cost in ${city.name}?`,
                 'acceptedAnswer': {
                   '@type': 'Answer',
-                  'text': `Our ${city.name} fishing charters start at $400 for a 4-hour inshore trip. We offer affordable rates with all equipment, bait, and licenses included.`
+                  'text': `Our ${city.name} fishing charters start at $450 for a 4-hour inshore trip. We offer affordable rates with all equipment, bait, and licenses included.`
                 }
               },
               {
@@ -242,7 +242,7 @@ export default function CityPage({ params }: CityPageProps) {
                     <strong>Max Guests:</strong> 3 people
                   </div>
                   <div className={styles.factItem}>
-                    <strong>Starting Price:</strong> $400
+                    <strong>Starting Price:</strong> $450
                   </div>
                 </div>
 
@@ -329,7 +329,7 @@ export default function CityPage({ params }: CityPageProps) {
               <div className={styles.faqItem}>
                 <h4>How much does a fishing charter cost in {city.name}?</h4>
                 <p>
-                  Our {city.name} fishing charters start at $400 for a 4-hour inshore trip. We offer affordable rates with all equipment, bait, and licenses included.
+                  Our {city.name} fishing charters start at $450 for a 4-hour inshore trip. We offer affordable rates with all equipment, bait, and licenses included.
                 </p>
               </div>
 

@@ -11,10 +11,10 @@
 
 ## Services
 ### Trip Types
-1. 4 Hour Inshore Fishing - $400 (year-round)
-2. 6 Hour Inshore Fishing - $550 (year-round)
-3. 4 Hour Nearshore Fishing - $450 (seasonal: April 1 - September 1)
-4. 6 Hour Offshore/Nearshore - $600 (seasonal: April 1 - September 1)
+1. 4 Hour Inshore Fishing - $450 (year-round)
+2. 6 Hour Inshore Fishing - $600 (year-round)
+3. 4 Hour Nearshore Fishing - $500 (seasonal: April 1 - September 1)
+4. 6 Hour Offshore/Nearshore - $650 (seasonal: April 1 - September 1)
 
 ### What's Included
 - All rods, reels, and tackle
