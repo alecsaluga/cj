@@ -12,7 +12,9 @@ interface BookingData {
   date: string
   time: string
   name: string
+  email: string
   phone: string
+  discountCode: string
   notes: string
   timestamp: string
 }
@@ -22,21 +24,12 @@ export default function BookingConfirmation() {
   const router = useRouter()
 
   useEffect(() => {
-    const pendingBooking = localStorage.getItem('pendingBooking')
-    if (pendingBooking) {
-      const data = JSON.parse(pendingBooking)
+    const lastBooking = localStorage.getItem('lastBooking')
+    if (lastBooking) {
+      const data = JSON.parse(lastBooking)
       setBooking(data)
-
-      // Send to webhook
-      fetch('https://n8n.alecautomations.com/webhook/27d5dc31-8f82-4bdf-8f51-f055a7d3d4eb', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: pendingBooking,
-      }).then(() => {
-        localStorage.removeItem('pendingBooking')
-      }).catch((error) => {
-        console.error('Failed to send booking data:', error)
-      })
+      // Clear after reading
+      localStorage.removeItem('lastBooking')
     }
   }, [])
 
@@ -54,6 +47,8 @@ export default function BookingConfirmation() {
     )
   }
 
+  const firstName = booking.name.split(' ')[0]
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -61,14 +56,14 @@ export default function BookingConfirmation() {
           <div className={styles.icon}>✓</div>
         </div>
 
-        <h1 className={styles.title}>BOOKING CONFIRMED!</h1>
+        <h1 className={styles.title}>REQUEST RECEIVED!</h1>
 
         <p className={styles.subtitle}>
-          Thank you for your booking. Captain CJ will reach out soon to confirm your trip details.
+          Thanks, {firstName}! Captain CJ will call you at <strong>{booking.phone}</strong> from <strong>(412) 979-4505</strong> to confirm your trip details and availability.
         </p>
 
         <div className={styles.summary}>
-          <h2 className={styles.summaryTitle}>YOUR BOOKING DETAILS</h2>
+          <h2 className={styles.summaryTitle}>YOUR REQUEST DETAILS</h2>
 
           <div className={styles.detail}>
             <span className={styles.label}>Launch Location</span>
@@ -101,11 +96,23 @@ export default function BookingConfirmation() {
           </div>
 
           <div className={styles.detail}>
+            <span className={styles.label}>Email</span>
+            <span className={styles.value}>{booking.email}</span>
+          </div>
+
+          <div className={styles.detail}>
             <span className={styles.label}>Phone</span>
             <span className={styles.value}>{booking.phone}</span>
           </div>
 
-          {booking.notes && (
+          {booking.discountCode && booking.discountCode !== 'none' && (
+            <div className={styles.detail}>
+              <span className={styles.label}>Discount Code</span>
+              <span className={styles.valueDiscount}>{booking.discountCode}</span>
+            </div>
+          )}
+
+          {booking.notes && booking.notes !== 'none' && (
             <div className={styles.detail}>
               <span className={styles.label}>Notes</span>
               <span className={styles.value}>{booking.notes}</span>
@@ -113,8 +120,11 @@ export default function BookingConfirmation() {
           )}
 
           <div className={`${styles.detail} ${styles.total}`}>
-            <span className={styles.label}>Total Paid</span>
-            <span className={styles.valueTotal}>${booking.price}</span>
+            <span className={styles.label}>Trip Price</span>
+            <span className={styles.valueTotal}>
+              ${booking.price}
+              {booking.discountCode === 'FISH50' && <span className={styles.discount}> (-$50)</span>}
+            </span>
           </div>
         </div>
 

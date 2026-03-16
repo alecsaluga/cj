@@ -22,7 +22,9 @@ const TIME_SLOTS = [
   '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM'
 ]
 
-type Step = 1 | 2 | 3 | 4 | 5 | 6
+const BOOKING_WEBHOOK = 'https://n8n.alecautomations.com/webhook/27d5dc31-8f82-4bdf-8f51-f055a7d3d4eb'
+
+type Step = 1 | 2 | 3 | 4 | 5 | 6 | 7
 
 export function BookingModal() {
   const [open, setOpen] = useState(false)
@@ -34,8 +36,11 @@ export function BookingModal() {
   const [date, setDate] = useState<Date | null>(null)
   const [time, setTime] = useState('')
   const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
+  const [discountCode, setDiscountCode] = useState('')
   const [notes, setNotes] = useState('')
+  const [submitting, setSubmitting] = useState(false)
 
   useEffect(() => {
     const handler = () => {
@@ -48,8 +53,11 @@ export function BookingModal() {
       setDate(null)
       setTime('')
       setName('')
+      setEmail('')
       setPhone('')
+      setDiscountCode(localStorage.getItem('discountCode') || '')
       setNotes('')
+      setSubmitting(false)
     }
     window.addEventListener('openBookingModal', handler)
     return () => window.removeEventListener('openBookingModal', handler)
@@ -59,9 +67,11 @@ export function BookingModal() {
 
   const trips = fishingType === 'inshore' ? INSHORE_TRIPS : NEARSHORE_TRIPS
 
-  const handlePayment = async () => {
-    // Store booking data in localStorage for webhook after Stripe redirect
+  const handleSubmitRequest = async () => {
+    setSubmitting(true)
+
     const bookingData = {
+      type: 'booking_request',
       launchLocation,
       fishingType: fishingType === 'inshore' ? 'Inshore' : 'Nearshore & Offshore',
       trip: selectedTrip,
@@ -69,33 +79,29 @@ export function BookingModal() {
       date: date ? date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : '',
       time,
       name,
+      email,
       phone,
-      notes,
+      discountCode: discountCode || 'none',
+      notes: notes || 'none',
       timestamp: new Date().toISOString(),
     }
-    localStorage.setItem('pendingBooking', JSON.stringify(bookingData))
 
-    // Stripe Payment Links
-    const stripeLinks: Record<number, string> = {
-      450: 'https://buy.stripe.com/14A4gz2RYdkM5TlbU90gw0p',
-      500: 'https://buy.stripe.com/14AbJ12RY0y06Xp1fv0gw0o',
-      600: 'https://buy.stripe.com/8x2dR9csy4OgbdF5vL0gw0n',
-      650: 'https://buy.stripe.com/6oUeVdfEKbcE3Ldgap0gw0m',
+    try {
+      await fetch(BOOKING_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(bookingData),
+      })
+    } catch (error) {
+      console.error('Webhook error:', error)
     }
 
-    const stripeUrl = stripeLinks[selectedPrice]
-    if (stripeUrl) {
-      window.location.href = stripeUrl
-    }
+    // Store booking data for thank you page
+    localStorage.setItem('lastBooking', JSON.stringify(bookingData))
+
+    // Redirect to thank you page for conversion tracking
+    window.location.href = '/booking-confirmation'
   }
-
-  // Redirect to confirmation page after successful payment
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search)
-    if (urlParams.get('payment') === 'success') {
-      window.location.href = '/booking-confirmation'
-    }
-  }, [])
 
   return (
     <>
@@ -111,11 +117,13 @@ export function BookingModal() {
         <div className={styles.modal}>
           <button className={styles.closeBtn} onClick={close} aria-label="Close">✕</button>
 
-          <div className={styles.progress}>
-            {[1, 2, 3, 4, 5, 6].map((s) => (
-              <div key={s} className={`${styles.dot} ${step >= s ? styles.dotActive : ''}`} />
-            ))}
-          </div>
+          {step !== 7 && (
+            <div className={styles.progress}>
+              {[1, 2, 3, 4, 5, 6].map((s) => (
+                <div key={s} className={`${styles.dot} ${step >= s ? styles.dotActive : ''}`} />
+              ))}
+            </div>
+          )}
 
           {step === 1 && (
             <div className={styles.stepContent}>
@@ -230,10 +238,24 @@ export function BookingModal() {
                 />
                 <input
                   className={styles.input}
+                  type="email"
+                  placeholder="Email Address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                  className={styles.input}
                   type="tel"
                   placeholder="Phone Number"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
+                />
+                <input
+                  className={styles.input}
+                  type="text"
+                  placeholder="Discount Code (optional)"
+                  value={discountCode}
+                  onChange={(e) => setDiscountCode(e.target.value.toUpperCase())}
                 />
                 <textarea
                   className={styles.textarea}
@@ -244,7 +266,7 @@ export function BookingModal() {
                 <button
                   className={`btn btn-primary ${styles.nextBtn}`}
                   onClick={() => setStep(6)}
-                  disabled={!name || !phone}
+                  disabled={!name || !email || !phone}
                 >
                   NEXT
                 </button>
@@ -256,7 +278,7 @@ export function BookingModal() {
           {step === 6 && (
             <div className={styles.stepContent}>
               <div className={styles.confirm}>
-                <h3 className={styles.stepTitle}>CONFIRM & PAY</h3>
+                <h3 className={styles.stepTitle}>CONFIRM YOUR REQUEST</h3>
                 <div className={styles.summary}>
                   <div className={styles.summaryRow}><span>Launch</span><span>{launchLocation}</span></div>
                   <div className={styles.summaryRow}><span>Type</span><span>{fishingType === 'inshore' ? 'Inshore' : 'Nearshore & Offshore'}</span></div>
@@ -264,18 +286,48 @@ export function BookingModal() {
                   <div className={styles.summaryRow}><span>Date</span><span>{date ? date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : ''}</span></div>
                   <div className={styles.summaryRow}><span>Time</span><span>{time}</span></div>
                   <div className={styles.summaryRow}><span>Name</span><span>{name}</span></div>
+                  <div className={styles.summaryRow}><span>Email</span><span>{email}</span></div>
                   <div className={styles.summaryRow}><span>Phone</span><span>{phone}</span></div>
+                  {discountCode && (
+                    <div className={styles.summaryRow}><span>Discount</span><span className={styles.discountCode}>{discountCode}</span></div>
+                  )}
                   <div className={`${styles.summaryRow} ${styles.summaryTotal}`}>
-                    <span>Total</span>
-                    <span>${selectedPrice}</span>
+                    <span>Trip Price</span>
+                    <span>${selectedPrice}{discountCode === 'FISH50' ? <span className={styles.discountNote}> (-$50)</span> : ''}</span>
                   </div>
                 </div>
-                <button className={`btn btn-primary ${styles.payBtn}`} onClick={handlePayment}>
-                  PAY ${selectedPrice}
+                <button
+                  className={`btn btn-primary ${styles.payBtn}`}
+                  onClick={handleSubmitRequest}
+                  disabled={submitting}
+                >
+                  {submitting ? 'SUBMITTING...' : 'REQUEST TO BOOK'}
                 </button>
-                <p className={styles.secureNote}>Secure payment via Stripe</p>
+                <p className={styles.secureNote}>We&apos;ll call you to confirm your booking</p>
               </div>
               <button className={styles.backBtn} onClick={() => setStep(5)}>← Back</button>
+            </div>
+          )}
+
+          {step === 7 && (
+            <div className={styles.stepContent}>
+              <div className={styles.success}>
+                <div className={styles.successIcon}>
+                  <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M20 6L9 17l-5-5"/>
+                  </svg>
+                </div>
+                <h3 className={styles.stepTitle}>REQUEST RECEIVED!</h3>
+                <p className={styles.successText}>
+                  Thanks, {name.split(' ')[0]}! We&apos;ve received your booking request.
+                </p>
+                <p className={styles.successSubtext}>
+                  Captain CJ will call you at <strong>{phone}</strong> from <strong>(412) 979-4505</strong> to confirm your trip details and availability.
+                </p>
+                <button className={`btn btn-primary ${styles.doneBtn}`} onClick={close}>
+                  DONE
+                </button>
+              </div>
             </div>
           )}
         </div>

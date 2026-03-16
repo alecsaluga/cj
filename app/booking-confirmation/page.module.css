@@ -120,6 +120,22 @@
   color: var(--cyan);
 }
 
+.valueDiscount {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--cyan);
+  text-align: right;
+}
+
+.discount {
+  font-size: 16px;
+  color: var(--cyan);
+}
+
+.subtitle strong {
+  color: var(--cyan);
+}
+
 .actions {
   display: flex;
   justify-content: center;
